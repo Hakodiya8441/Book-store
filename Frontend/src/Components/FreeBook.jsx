@@ -1,12 +1,29 @@
-import React from 'react'
-import list from "../../public/list.json"
+import React, { useEffect, useState } from 'react'
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import axios from "axios";
 import Cards from './Cards';
+
+
 const FreeBook = () => {
-    const filterData = list.filter((data)=>data.category === "Free")
-    console.log(filterData)
+
+  const [book,setbook]= useState([])
+  useEffect(()=>{
+    const getBook =async()=>{
+       try {
+      const res =await axios.get("http://localhost:5000/book");
+      const data = res.data.filter((data)=>data.category === "Free")
+      console.log(data)
+      setbook(data)
+       } catch (error) {
+        console.log(error)
+       }
+    }
+    getBook();
+  },[])
+   
 
     var settings = {
       dots: true,
@@ -44,7 +61,7 @@ const FreeBook = () => {
     };
   return (
     <>
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 ">
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 mt-8">
 <div>
 <h1 className='font-semibold text-xl pb-2'>Free Offered Courses</h1>
 <p>According to a software development firm, an e-catalogue delivers vital information about
@@ -55,7 +72,7 @@ the items they want in the format they want.</p>
     <div>
     <Slider {...settings}>
         {
-          filterData.map((item)=>(
+          book.map((item)=>(
             <Cards item={item} key={item.id}/>
           ))
         }

@@ -11,10 +11,11 @@ const Contact = () => {
       const onSubmit = (data) => console.log(data);
   return (
     <>
-     <div className="flex h-screen justify-center items-center">
-        <div className="w-[40%]">
+     <div className="flex h-screen justify-center items-center dark:bg-slate-900 dark:text-black">
+        <div className="w-[600px]">
           <div className="modal-box">
-            <form method="dialog" onSubmit={handleSubmit(onSubmit)}>
+            {/* <form method="dialog" onSubmit={handleSubmit(onSubmit)} > */}
+            <form action="https://public.herotofu.com/v1/84165c10-44d7-11ef-b917-afc6b84c2283" method="post" accept-charset="UTF-8" >
               {/* if there is a button in form, it will close the modal */}
               <Link
                 to={"/"}
@@ -36,7 +37,7 @@ const Contact = () => {
                 {...register("text", { required: true })}
               />
               <br/>
-              {errors.email && <span className="text-sm text-red-600">This field is required*</span>}
+              {errors.text && <span className="text-sm text-red-600">This field is required*</span>}
             </div>
 
             {/* Email */}
@@ -60,10 +61,10 @@ const Contact = () => {
               <span>Message</span>
               <br />
               <textarea
-                name='text'
+                name='textarea'
                 placeholder="Enter Your Password"
                 className="w-80 px-3 py-1 border rounded-md outline-none"
-                {...register("text", { required: true })}
+                {...register("textarea", { required: true })}
               />
               <br/>
                {errors.text && <span className="text-sm text-red-600">This field is required*</span>}
